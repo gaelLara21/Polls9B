@@ -1,0 +1,14 @@
+<h1>{{ question }}</h1>
+<form metod="post">
+    {% csrf_token %}
+    {% for c in question.choice_set.all %}
+    <input 
+    type="radio"
+    name="choice"
+    id="choice_{{ c.id }}"
+    value="{{ c.id }}">
+    <label for="choice_{{ c.id }}">{{ c.choice_text}}</label>
+    <br>
+    {% endfor %}
+    <input type="submit" value="votar">
+</form>
