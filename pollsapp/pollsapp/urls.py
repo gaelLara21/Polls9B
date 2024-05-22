@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.http import HttpResponse
-from django.urls import path
+from django.urls import path, include
 
 def hello(request, num):
     html = ''
@@ -26,5 +26,6 @@ def hello(request, num):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello/<int:num>', hello, name='hello')
+    path('hello/<int:num>/', hello, name='hello'),
+    path('', include('polls.urls'))
 ]

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+<h1>¡Bienvenido a las Encuestas</h1>
+<h2>Responde las preguntas</h2>
+<ul>
+    <h3>Encuesta</h3>
+    {% for q in questions %}
+    <li><a href="{% url 'polls:vote' q.id %}">{{ q.question_text }}</a></li>
+    {% endfor %}
+
+</ul>
+{% endblock %}
