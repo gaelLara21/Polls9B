@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.http import Http404
+from django.shortcuts import get_object_or_404, render, redirect
 
 from .models import Question, Choice
 
@@ -11,18 +12,26 @@ def home(request):
     })
 
 def vote(request, q_id):
-    question = Question.objects.get(id=q_id)
+    question = get_object_or_404(Question, id=q_id)
 
     if request.method == 'POST':
-       choice = request.POST['choice']
-       c = Choice.objects.get(id=choice)
-       c.votes += 1 
-       c.save()
-    return redirect('polls:results', q_id)
-    return render(request, 'polls/question.html',
-                  {"question": question })
+        try:
+            choice_id = request.POST['choice']
+            c = Choice.objects.get(id=choice_id)
+            c.votes += 1
+            c.save()
+            return redirect('polls:results', q_id=q_id)
+        except (KeyError, Choice.DoesNotExist):
+            return render(request, 'polls/question.html', {
+                "question": question,
+                "error_message": "Debes seleccionar una opción válida."
+            })
+    return render(request, 'polls/question.html',{"question": question})
 
 def results(request, q_id):
-    question = Question.objects.get(id=q_id)
+    try:
+       question = Question.objects.get(id=q_id)
+    except Question.DoesNotExist:
+        raise Http404("Question Does Not Exist")
     return render(request, 'polls/results.html', 
                   {"question": question})
