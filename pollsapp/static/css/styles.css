@@ -1,12 +1,93 @@
-body{
-    background-color: rgb(117, 114, 114);
+body {
+    background-color: rgb(87, 85, 85);
     margin: 0;
     padding: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    text-decoration: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+}
+
+h1, h2, h3 {
+    text-align: center;
+    color: #f1f1f1;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    background-color: #333;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+ul li a:hover {
+    color: #ffcc00;
+}
+
+form {
+    text-align: center;
+    margin-top: 20px;
+}
+
+form input[type="radio"] {
+    margin-right: 10px;
+}
+
+form label {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px 0;
+    background-color: #000000;
+    border-radius: 5px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+form label:hover {
+    background-color: #555;
+}
+
+form input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+    background-color: #45a049;
 }
 
 #myChart {
-    max-width: 50%; /* La gráfica no será más ancha que el contenedor */
-    height: min-content; /* La altura se ajustará automáticamente según el ancho */
+    max-width: 50%;
+    height: min-content;
+    margin: 0 auto;
+}
+
+a.button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px auto;
+    background-color: #007BFF;
+    color: white !important;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+a.button:hover {
+    background-color: #0056b3;
 }
