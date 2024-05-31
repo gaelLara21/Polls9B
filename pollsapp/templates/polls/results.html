@@ -2,14 +2,52 @@
 
 {% block title %} Resultados {% endblock %}
 
-
 {% block content %}
-<h1>{{ question }}</h1>
+<h1>{{ question.question_text }}</h1>
 <ul>
     {% for c in question.choice_set.all %}
-    <li>{{ c.choice_text}} --> {{ c.votes }}</li>
+    <li>{{ c.choice_text }} --> {{ c.votes }}</li>
     {% endfor %}
 </ul>
 <hr>
 <a href="{% url 'polls:home' %}">Inicio</a>
+
+<div class="container mt-5">
+    <h2>Gráfica de Resultados</h2>
+    <!-- Reducir aún más el tamaño del canvas -->
+    <canvas id="myChart"></canvas>
+</div>
+
+<!-- Incluir Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var labels = {{ labels|safe }};
+    var data = {{ data|safe }};
+    var colors = [
+        'rgba(255, 99, 132, 0.7)',
+        'rgba(54, 162, 235, 0.7)',
+        'rgba(255, 206, 86, 0.7)',
+        'rgba(75, 192, 192, 0.7)',
+        'rgba(153, 102, 255, 0.7)',
+        'rgba(255, 159, 64, 0.7)',
+        'rgba(220, 20, 60, 0.7)',
+        'rgba(75, 0, 130, 0.7)', 
+        'rgba(128, 0, 128, 0.7)', 
+        'rgba(0, 128, 0, 0.7)', 
+    ];
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                backgroundColor: colors
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+</script>
 {% endblock %}
